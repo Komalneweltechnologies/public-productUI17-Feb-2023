@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+.border-rounded14 {
+  border-radius: 14px;
+}
+
+.bg-green {
+  background: #2c6149;
+}
+
+::ng-deep .p-inputtext-sm .p-inputtext {
+  padding: 0.45625rem 0.45625rem !important;
+}

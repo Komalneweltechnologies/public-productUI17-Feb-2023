@@ -1,0 +1,130 @@
+<p-toast></p-toast>
+<div class="col-12 md:col-8">
+	<h3 class="mt-2">HerokuApp</h3>
+</div>
+<div class="mx-0 md:m-3">
+	<div class="grid shadow-sm bg-white p-2 md:p-3 mx-0 mb-3">
+		
+		<div class="col-12 md:col-7">
+			<div class="">
+				<ng-template pTemplate="caption">
+					<div class="table-header">
+						List of Customers
+						<span class="p-input-icon-left">
+								<i class="pi pi-search"></i>
+								<input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Global Search" />
+							</span>
+					</div>
+				</ng-template>
+				<button pButton type="button"  icon="pi pi-search" class="ms-2 p-button-outlined p-button-secondary p-button-sm"
+					iconPos="left"></button>
+			</div>
+			<!-- <ng-template pTemplate="left">
+				<span class="p-input-icon-left">
+					<i class="pi pi-search"></i>
+					<input pInputText type="text" (click)="dt.filterGlobal($event.target, 'contains')"
+						placeholder="Search..." />
+				</span>
+		  
+			</ng-template> -->
+		</div>
+
+        <div class="col-12 md:col-5">
+            <p-button (click)="showCreateNewTaskDialog()" icon="pi pi-plus" label="New Task"
+                styleClass="p-button-warning px-3 py-2 mb-md-1">
+            </p-button>
+        </div>
+	</div>
+
+
+    <p-dialog header="LOB" [(visible)]="NewTaskDialog" [breakpoints]="{'980px': '85vw'}" [style]="{width: '60vw'}"
+	[draggable]="false" [resizable]="false">
+	<form [formGroup]="ProductForm" >
+    <div class="card h-20em border-rounded14">
+		<div class="card-body">
+			<div class="grid">
+				<div class="col-12 md:col-6">
+					<h6 class="text-gray-500">Product Name</h6>
+					<input type="text" formControlName="productName" pInputText class="p-inputtext-sm" placeholder="">
+				</div>
+				<div class="col-12 md:col-6">
+					<h6 class="text-gray-500">Description</h6>
+					<input type="text" formControlName="description" pInputText class="p-inputtext-sm" placeholder="">
+				</div>
+				<div class="col-12 md:col-6">
+					<h6 class="text-gray-500">Price</h6>
+					<input type="text" [readOnly]="!showSaveBtn"  formControlName="price" pInputText class="p-inputtext-sm" placeholder="">
+				</div>
+				<div class="col-12 md:col-6">
+					<h6 class="text-gray-500">Category Id</h6>
+					<input type="text" [readOnly]="!showSaveBtn" formControlName="category_id" pInputText class="p-inputtext-sm" placeholder="">
+				</div>
+				<div class="col-12 md:col-6">
+					<h6 class="text-gray-500">Stock Available</h6>
+					<input type="text" [readOnly]="!showSaveBtn" formControlName="stock_available" pInputText class="p-inputtext-sm" placeholder="">
+
+				</div>
+				<div class="col-12 md:col-6">
+					<h6 class="text-gray-700">Product imoage</h6>
+					<p-fileUpload name="docs[]"  accept="image/*"  (onSelect)="onSelectEvent($event)" [showUploadButton]="true"
+	                 [showCancelButton]="true">
+					</p-fileUpload>
+					<img *ngIf="" [src]="url" alt="image">
+
+				</div>			
+			</div>
+			<div class="grid justify-content-left mt-3">
+				<button pButton pRipple *ngIf="showSaveBtn" type="button" label="Save" (click)="SubmitData()" class="p-button-sm m-2"></button>
+				<button pButton pRipple *ngIf="!showSaveBtn" type="button" label="Update" (click)="UpdateData()" class="p-button-sm m-2"></button>
+			
+				<button pButton pRipple type="button" label="Discard" class="p-button-secondary p-button-sm m-2"></button>
+			</div>
+		</div>
+	</div>
+	</form>
+    </p-dialog>
+
+	<div class="grid mb-3">
+		<div class="col-12">
+			<div class="card mt-3">
+
+				<p-table #dt [value]="TaskDetails" styleClass="p-datatable-sm p-datatable-gridlines" [scrollable]="true"
+					scrollHeight="400px" [rows]="8" [paginator]="true" [tableStyle]="{'min-width': '40rem'}"
+					
+					[globalFilterFields]="['productName','description','stock_available','product_image']"
+					dataKey="id" editMode="row" [rowHover]="true"
+					currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+					[showCurrentPageReport]="true">
+					<ng-template pTemplate="header">
+						<tr>
+							<th>Product Name</th>
+							<th>Description</th>
+							<th>Stock Available</th>
+							<th>Image</th>
+							<th>Edit</th>
+
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="body" let-product>
+						<tr>
+							<td>{{product.productName}}</td>
+							<td>{{product.description}}</td>
+							<td>{{product.stock_available}}</td>
+							<td>{{product.product_image}}</td>
+							<td><button pButton type="button" icon="pi pi-pencil" iconPos="left" class="p-button-rounded"
+								(click)="EditTaskDetails(product)"style="width: 2rem;"></button>
+							</td>
+						</tr>
+					</ng-template>
+					
+				</p-table>
+			</div>
+
+		</div>
+	</div>
+
+	
+
+</div>
+
+

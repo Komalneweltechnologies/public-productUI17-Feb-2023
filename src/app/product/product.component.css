@@ -1,0 +1,18 @@
+.iconSize .p-button.p-button-icon-only.p-button-rounded {
+    height: 1.5rem !important;
+  }
+  
+  .iconSize .p-button.p-button-icon-only {
+    width: 1.5rem !important;
+  }
+  
+  ::ng-deep .iconSize .pi {
+    font-size: 0.7rem !important;
+  }
+  .p-fileupload .p-fileupload-buttonbar button:nth-child(3):disabled{
+    opacity: 0.5;
+    cursor:default;
+  }
+  .p-fileupload .p-fileupload-buttonbar button:nth-child(2){
+    display:none;
+  }
